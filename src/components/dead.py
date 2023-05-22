@@ -4,9 +4,7 @@ class Dead:
         self.player = player
         
     def check(self, obstacles):
-        obstacle = obstacles.obstacles[0]
-        
-        if obstacle and self.player.dino_rect.colliderect(obstacle.rect):
+        if obstacles.obstacles and self.player.dino_rect.colliderect(obstacles.obstacles[0].rect):
             self.player.dino_dead = True
             return True
         return False

@@ -13,8 +13,6 @@ class Menu:
         self.text = self.font.render("Press any Key to Start", True, (0, 0, 0))
 
     def restartScreen(self):
-        self.SCREEN.fill((255, 255, 255))
-
         textRect = self.text.get_rect()
         textRect.center = (self.SCREEN_WIDTH // 2, self.SCREEN_HEIGHT // 2)
 

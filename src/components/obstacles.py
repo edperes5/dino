@@ -44,31 +44,28 @@ obstaclesData = [
 
 
 class Obstacles:
-    obstacles = []
 
     def __init__(self, SCREEN_WIDTH, game_speed, SCREEN, player):
+        self.obstacles = []
         self.SCREEN_WIDTH = SCREEN_WIDTH
         self.game_speed = game_speed
         self.SCREEN = SCREEN
 
+    def generate(self):
+        obstacleData = obstaclesData[random.randint(0, len(obstaclesData) - 1)]
+        self.obstacles.append(Obstacle(obstacleData, random.randint(0, len(obstacleData["images"]) - 1), self.SCREEN_WIDTH, self.SCREEN))
+
     def update(self):
         if len(self.obstacles) == 0:
-            obstacleData = obstaclesData[random.randint(
-                0,
-                len(obstaclesData) - 1)]
-            self.obstacles.append(
-                Obstacle(obstacleData,
-                         random.randint(0,
-                                        len(obstacleData["images"]) - 1),
-                         self.SCREEN_WIDTH))
+            self.generate()
 
     def draw(self):
         for obstacle in self.obstacles:
             if obstacle.anim:
-                obstacle.animate(self.SCREEN)
+                obstacle.animate()
             else:
-                obstacle.draw(self.SCREEN)
+                obstacle.draw()
+                
             obstacleStatus = obstacle.update(self.game_speed)
-
             if not obstacleStatus:
-                self.obstacles.pop()
+                self.obstacles.pop(0)
